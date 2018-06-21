@@ -63,6 +63,6 @@ Vagrant.configure("2") do |config|
     chown -R vagrant:vagrant /tmp/openshift
   SHELL
   config.vm.provision "file", source: "openshift", destination: "/tmp/openshift"
-  #config.vm.provision "shell", privileged: "false", inline: "hostname|grep master && sh -x /tmp/openshift/install-openshift.sh || echo Not executed"
+  config.vm.provision "shell", inline: "hostname|grep master && su - vagrant -c 'sh -x /tmp/openshift/install-openshift.sh' || echo Not executed"
 end
 
